@@ -2,15 +2,15 @@
 ### Plan organizacji Bazy Danych
 #### 1. Zdefiniowanie typu Danych:
 
-Informacje o użytkowniku (imię i nazwisko, dane kontaktowe)
-Historia edukacji
-Doświadczenie zawodowe
-Umiejętności
-Certyfikaty
+Informacje o użytkowniku (imię i nazwisko, dane kontaktowe)  
+Historia edukacji  
+Doświadczenie zawodowe  
+Umiejętności  
+Certyfikaty  
 ##### Oferty pracy: 
--kategorie
--opis- słowa klucze
--wymagania
+-kategorie  
+-opis- słowa klucze  
+-wymagania  
 
 
 #### 2. Wybor typu bazy danych:
