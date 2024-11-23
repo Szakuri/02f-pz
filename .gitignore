@@ -1,0 +1,28 @@
+# Pliki Python bytecode
+*.pyc
+__pycache__/
+
+# Folder wirtualnego środowiska
+venv/
+env/
+
+# Plik bazy danych SQLite
+*.db
+
+# Przesyłane pliki (np. CV)
+uploads/
+
+# Plik z kluczami i sekretami
+.env
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# Systemowe pliki macOS
+.DS_Store
+
+# Pliki instalacyjne
+*.exe

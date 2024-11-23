@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <title>Prześlij CV</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<body>
+    <h1>Prześlij CV</h1>
+    <form action="/analyze_cv" method="post" enctype="multipart/form-data">
+        <label for="name">Imię i nazwisko:</label>
+        <input type="text" name="name" required>
+
+        <label for="position_id">Stanowisko:</label>
+        <select name="position_id" required>
+            {% for position in positions %}
+            <option value="{{ position.id }}">{{ position.title }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="file">Plik CV:</label>
+        <input type="file" name="file" accept=".pdf,.docx" required>
+
+        <button type="submit">Analizuj</button>
+    </form>
+</body>
+
+</html>

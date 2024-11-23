@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Wyniki Analizy</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+
+<body>
+    <h1>Wyniki dla {{ name }}</h1>
+    <table>
+        <tr>
+            <th>Słowo kluczowe</th>
+            <th>Wystąpienia</th>
+        </tr>
+        {% for keyword, count in results.items() %}
+        <tr>
+            <td>{{ keyword }}</td>
+            <td>{{ count }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h3>Całkowity wynik: {{ total_score }}</h3>
+</body>
+
+</html>
