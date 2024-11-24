@@ -101,14 +101,16 @@ def create_app():
 
             # Odczytanie tekstu z pliku za pomocą OCR
             extracted_text = ""
-            if file.filename.lower().endswith(('.png', '.jpg', '.jpeg')):
+            if file.filename.lower().endswith((".png", ".jpg", ".jpeg")):
                 extracted_text = image_to_string(file_path)
-            elif file.filename.lower().endswith('.pdf'):
+            elif file.filename.lower().endswith(".pdf"):
                 pages = convert_from_path(file_path)
                 extracted_text = " ".join(image_to_string(page) for page in pages)
-            elif file.filename.lower().endswith('.docx'):
+            elif file.filename.lower().endswith(".docx"):
                 doc = Document(file_path)
-                extracted_text = " ".join(paragraph.text for paragraph in doc.paragraphs)
+                extracted_text = " ".join(
+                    paragraph.text for paragraph in doc.paragraphs
+                )
 
             # Normalizacja tekstu
             normalized_text = extracted_text.lower()
@@ -122,7 +124,12 @@ def create_app():
             total_score = sum(results.values())
 
             # Renderowanie szablonu HTML z wynikami
-            return render_template("analyze_results.html", name=name, results=results, total_score=total_score)
+            return render_template(
+                "analyze_results.html",
+                name=name,
+                results=results,
+                total_score=total_score,
+            )
 
         except Exception as e:
             return jsonify({"error": str(e)}), 500
@@ -238,6 +245,63 @@ def create_app():
         return render_template(
             "manage_global_positions.html", global_positions=global_positions
         )
+
+    @app.route("/upload_multiple", methods=["POST"])
+    def upload_multiple():
+        try:
+            name = request.form["name"]
+            position_id = int(request.form["position_id"])
+            uploaded_files = request.files.getlist("files")
+
+            if not uploaded_files:
+                return jsonify({"error": "Nie przesłano żadnych plików"}), 400
+
+            keywords = [
+                kw.word for kw in Keyword.query.filter_by(position_id=position_id).all()
+            ]
+
+            # Lista na wyniki analizy dla każdego pliku
+            results = []
+
+            for file in uploaded_files:
+                file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+                file.save(file_path)
+
+                extracted_text = ""
+                if file.filename.lower().endswith((".png", ".jpg", ".jpeg")):
+                    extracted_text = image_to_string(Image.open(file_path))
+                elif file.filename.lower().endswith(".pdf"):
+                    pages = convert_from_path(file_path)
+                    extracted_text = " ".join(image_to_string(page) for page in pages)
+                elif file.filename.lower().endswith(".docx"):
+                    doc = Document(file_path)
+                    extracted_text = " ".join(
+                        paragraph.text for paragraph in doc.paragraphs
+                    )
+
+                normalized_text = extracted_text.lower()
+
+                # Analiza słów kluczowych dla bieżącego pliku
+                analysis = {
+                    keyword: normalized_text.count(keyword.lower())
+                    for keyword in keywords
+                }
+                total_score = sum(analysis.values())
+
+                # Dodaj analizę do wyników
+                results.append(
+                    {
+                        "name": file.filename,
+                        "analysis": analysis,
+                        "total_score": total_score,
+                    }
+                )
+
+            # Przekaż wyniki do szablonu HTML
+            return render_template("analyze_results.html", results=results)
+
+        except Exception as e:
+            return jsonify({"error": str(e)}), 500
 
     return app
 
