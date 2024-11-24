@@ -3,3 +3,5 @@ Flask-SQLAlchemy
 Flask-Migrate
 pdf2image
 pytesseract
+python-docx
+pillow

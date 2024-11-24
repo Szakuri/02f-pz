@@ -1,14 +1,19 @@
-body {
-	font-family: Arial, sans-serif;
-	margin: 20px;
+.flash-messages {
+	list-style: none;
+	padding: 0;
 }
 
-h1 {
-	color: #333;
+.flash-messages li {
+	margin: 5px 0;
+	padding: 10px;
+	border-radius: 5px;
+	color: #fff;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-	gap: 10px;
+.flash-messages li.error {
+	background-color: #f44336; /* czerwony dla błędów */
+}
+
+.flash-messages li.success {
+	background-color: #4caf50; /* zielony dla sukcesów */
 }
