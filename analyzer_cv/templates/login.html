@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Logowanie</title>
+</head>
+
+<body>
+    <h1>Logowanie</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class="flash-messages">
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <form method="POST">
+        <label for="username">Nazwa użytkownika:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="password">Hasło:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Zaloguj się</button>
+    </form>
+    <p>Nie masz konta? <a href="/register">Zarejestruj się</a></p>
+</body>
+
+</html>

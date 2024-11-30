@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
+    <title>Twoje Stanowiska</title>
+</head>
+
+<body>
+    <h1>Twoje Stanowiska</h1>
+    <ul>
+        {% for position in positions %}
+        <li>{{ position.title }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Wróć</a>
+</body>
+
+</html>
