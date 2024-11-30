@@ -1,0 +1,40 @@
+Project nasz_projekt {
+  database_type: 'MySQL'
+}
+
+Table Candidate {
+  id int [pk]
+  position_id int [ref: > Position.id]
+  name varchar(100) [not null]
+  email varchar(100) [not null, unique]
+  phone varchar(20)
+  resume_text text
+  skills varchar(255)
+  education varchar(255)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  status enum('pending', 'reviewed', 'recommended', 'not recommended') [default: 'pending']
+}
+
+Table Position {
+  id int [pk]
+  user_id int [ref: > user.id]
+  title varchar(100) [not null]
+  description text [not null]
+  requirements text [not null]
+  location varchar(100)
+  posted_at timestamp [default: `CURRENT_TIMESTAMP`]
+  status enum('open', 'closed') [default: 'open']
+}
+
+Table keyword {
+  id int [pk]
+  word varchar(50) [not null]
+  position_id int [ref: > Position.id]
+}
+
+Table user {
+  id int [pk]
+  username varchar(100) [not null, unique]
+  email varchar(120) [not null, unique]
+  password_hash varchar(200) [not null]
+}
