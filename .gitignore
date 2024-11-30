@@ -26,3 +26,4 @@ uploads/
 
 # Pliki instalacyjne
 *.exe
+*.msi
