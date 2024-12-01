@@ -9,15 +9,6 @@
 
 <body>
     <h1>Logowanie</h1>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class="flash-messages">
-        {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
     <form method="POST">
         <label for="username">Nazwa użytkownika:</label><br>
         <input type="text" id="username" name="username" required><br><br>
