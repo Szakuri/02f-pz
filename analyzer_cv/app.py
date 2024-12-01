@@ -1,4 +1,4 @@
-from flask import ( # type: ignore
+from flask import (
     Flask,
     render_template,
     request,
@@ -8,14 +8,13 @@ from flask import ( # type: ignore
     flash,
     session,
 )
-
-from flask_sqlalchemy import SQLAlchemy 
+from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from werkzeug.security import generate_password_hash, check_password_hash 
-from pytesseract import image_to_string 
+from werkzeug.security import generate_password_hash, check_password_hash
+from pytesseract import image_to_string
 from pdf2image import convert_from_path
 from PIL import Image
-from docx import Document 
+from docx import Document
 import os
 
 
