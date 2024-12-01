@@ -14,10 +14,6 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from pytesseract import image_to_string
 from pdf2image import convert_from_path
 import os
-import stanza 
-
-
-stanza.download('pl')
 
 # Inicjalizacja bazy danych
 db = SQLAlchemy()
@@ -82,6 +78,7 @@ def create_app():
     def analyze_cv():
         try:
             # Pobierz dane z formularza
+            name = request.form["name"]
             position_id = int(request.form["position_id"])
             file = request.files["file"]
 
@@ -94,16 +91,8 @@ def create_app():
                 kw.word for kw in Keyword.query.filter_by(position_id=position_id).all()
             ]
 
-<<<<<<< Updated upstream
             # Odczytanie tekstu z pliku PDF za pomocą OCR
             try:
-=======
-            # Odczytanie tekstu z pliku za pomocą OCR
-            extracted_text = ""
-            if file.filename.lower().endswith((".png", ".jpg", ".jpeg")):
-                extracted_text = image_to_string(Image.open(file_path))
-            elif file.filename.lower().endswith(".pdf"):
->>>>>>> Stashed changes
                 pages = convert_from_path(file_path)
                 extracted_text = " ".join(image_to_string(page) for page in pages)
             except Exception as e:
@@ -113,16 +102,6 @@ def create_app():
                     ),
                     500,
                 )
-
-            # Analiza za pomocą Stanza
-            nlp = stanza.Pipeline(lang='pl', processors='tokenize,ner')
-            doc = nlp(extracted_text)
-
-            # Wykrywanie imion i nazwisk
-            names = []
-            for entity in doc.entities:
-                if entity.type == "PER":
-                    names.append(entity.text)
 
             # Normalizacja tekstu
             normalized_text = extracted_text.lower()
@@ -140,20 +119,11 @@ def create_app():
             db.session.add(candidate)
             db.session.commit()
 
-<<<<<<< Updated upstream
             return (
                 jsonify(
                     {"message": "Analiza zakończona pomyślnie", "results": results}
                 ),
                 200,
-=======
-            # Renderowanie szablonu HTML z wynikami
-            return render_template(
-                "analyze_results.html",
-                name=", ".join(names) if names else "N/A",
-                results=results,
-                total_score=total_score,
->>>>>>> Stashed changes
             )
 
         except Exception as e:
