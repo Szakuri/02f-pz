@@ -12,7 +12,9 @@
     <h1>Twoje Stanowiska</h1>
     <ul>
         {% for position in positions %}
-        <li>{{ position.title }}</li>
+        <li>
+            {{ position.title }} - <a href="{{ url_for('edit_position', position_id=position.id) }}">Edytuj</a>
+        </li>
         {% endfor %}
     </ul>
     <a href="/">Wróć</a>

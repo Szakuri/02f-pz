@@ -6,11 +6,6 @@ __pycache__/
 venv/
 env/
 
-# Plik bazy danych SQLite
-*.db
-
-# Przesyłane pliki (np. CV)
-uploads/
 
 # Plik z kluczami i sekretami
 .env
@@ -26,4 +21,8 @@ uploads/
 
 # Pliki instalacyjne
 *.exe
+<<<<<<< Updated upstream
 *.msi
+=======
+*.msi
+>>>>>>> Stashed changes

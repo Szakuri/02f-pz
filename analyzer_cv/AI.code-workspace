@@ -1,0 +1,71 @@
+{
+	"folders": [
+		{
+			"path": "../../../AI"
+		},
+		{
+			"path": "../../../Dostęp/login_project"
+		},
+		{
+			"path": "../../../Dostęp/basic_auth_project"
+		},
+		{
+			"path": "../../../Nowatorska/DEMO"
+		},
+		{
+			"path": "../../../WebApps/Lab2"
+		},
+		{
+			"path": "../../../NowatorskaMAIN"
+		},
+		{
+			"path": "../../../NowatorskaMAIN-A"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw3_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw4_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../WebApps/tempcanv"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw5_Nazwisko_Imię"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw5_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw6_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw(6)_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../Zaawansowane chmury/Lab2"
+		},
+		{
+			"path": "../../../Zaawansowane chmury/Lab2_1"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_zaliczenie_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../WebApps/WEB2324_NST_PRACA_ćw7_Malinowski_Łukasz"
+		},
+		{
+			"path": "../../../NowatorskaX"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"python.formatting.provider": "none",
+		"liveServer.settings.multiRootWorkspaceName": "Strona MMC"
+	}
+}

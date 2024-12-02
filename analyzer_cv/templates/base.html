@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>{% block title %}Aplikacja CV{% endblock %}</title>
+</head>
+
+<body>
+    <header>
+        <h1>Aplikacja Analizy CV</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Strona główna</a></li>
+                {% if session.get('user_id') %}
+                <li><a href="/add_position">Dodaj stanowisko</a></li>
+                <li><a href="/view_positions">Moje stanowiska</a></li>
+                <li><a href="/upload">Prześlij CV</a></li>
+                <li><a href="/logout">Wyloguj się</a></li>
+                {% else %}
+                <li><a href="/login">Logowanie</a></li>
+                <li><a href="/register">Rejestracja</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Aplikacja CV. Wszelkie prawa zastrzeżone.</p>
+    </footer>
+</body>
+
+</html>

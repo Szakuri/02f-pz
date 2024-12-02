@@ -9,14 +9,19 @@
 </head>
 
 <body>
-    <h1>Witaj, {{ username }}!</h1>
-    <p>Co chciałbyś zrobić dzisiaj?</p>
-    <ul>
-        <li><a href="/add_position">Dodaj nowe stanowisko</a></li>
-        <li><a href="/view_positions">Zobacz swoje stanowiska</a></li>
-        <li><a href="/logout">Wyloguj się</a></li>
-        <li><a href="/upload">Prześlij CV</a></li>
-    </ul>
+    <div class="center-container">
+        <div class="content-box">
+            <h1>Witaj, {{ username }}!</h1>
+            <p>Co chciałbyś zrobić dzisiaj?</p>
+            <div class="button-container">
+                <a href="/upload" class="action-button">Prześlij CV</a>
+                <a href="/add_position" class="action-button">Dodaj nowe stanowisko</a>
+                <a href="/view_positions" class="action-button">Zobacz swoje stanowiska</a>
+                <a href="/ranking" class="action-button">Zobacz ranking</a>
+                <a href="/logout" class="action-button">Wyloguj się</a>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

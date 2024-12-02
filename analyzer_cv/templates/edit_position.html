@@ -1,0 +1,19 @@
+<form method="post">
+    <label for="title">Tytuł stanowiska:</label><br>
+    <input type="text" id="title" name="title" value="{{ position.title }}" required><br><br>
+
+    <label>Słowa kluczowe i ich wagi:</label><br>
+    <ul>
+        {% for keyword in keywords %}
+        <li>
+            <strong>{{ keyword.word }}</strong>
+            <!-- Ukryte pole na keyword_id -->
+            <input type="hidden" name="keyword_ids" value="{{ keyword.id }}">
+            <!-- Pole na wagę -->
+            <input type="number" name="weights" value="{{ keyword.weight }}" min="1" max="5" required>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <button type="submit">Zapisz zmiany</button>
+</form>

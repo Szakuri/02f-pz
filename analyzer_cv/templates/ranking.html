@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Ranking{% endblock %}
+
+{% block content %}
+<h2>Ranking kandydatów</h2>
+
+<!-- Formularz wyboru stanowiska i liczby wyników -->
+<form method="get">
+    <label for="position_id">Wybierz stanowisko:</label>
+    <select id="position_id" name="position_id">
+        {% for pos in positions %}
+        <option value="{{ pos.id }}" {% if pos.id==position.id %}selected{% endif %}>
+            {{ pos.title }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="limit">Liczba wyników (1-50):</label>
+    <input type="number" id="limit" name="limit" value="{{ limit }}" min="1" max="50">
+
+    <button type="submit">Pokaż ranking</button>
+</form>
+
+<!-- Tabela z rankingiem -->
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Imię i nazwisko</th>
+            <th>Punkty</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for candidate in candidates %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ candidate.name }}</td>
+            <td>{{ candidate.points }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ url_for('home') }}"><button>Wróć</button></a>
+{% endblock %}

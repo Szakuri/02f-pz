@@ -1,0 +1,14 @@
++----------------+       +----------------+       +----------------+       +----------------+
+|    Candidate   |       |    Position    |       |     keyword    |       |      user      |
++----------------+       +----------------+       +----------------+       +----------------+
+| id (PK)        |       | id (PK)        |       | id (PK)        |       | id (PK)        |
+| position_id (FK)|<---->| user_id (FK)   |       | word           |       | username (U)   |
+| name           |       | title          |       | position_id (FK)|<---->| email (U)      |
+| email (U)      |       | description    |       +----------------+       | password_hash  |
+| phone          |       | requirements   |                                +----------------+
+| resume_text    |       | location       |
+| skills         |       | posted_at      |
+| education      |       | status         |
+| created_at     |       +----------------+
+| status         |
++----------------+
