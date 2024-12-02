@@ -5,17 +5,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 class Position(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-<<<<<<< Updated upstream
-    user_id = db.Column(
-        db.Integer, db.ForeignKey("user.id"), nullable=True
-    )
-    is_global = db.Column(
-        db.Boolean, default=False
-    )
-=======
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)  # Null dla globalnych stanowisk
     is_default = db.Column(db.Boolean, default=False)  # Flaga dla globalnych stanowisk
->>>>>>> Stashed changes
     keywords = db.relationship("Keyword", backref="position", lazy=True)
 
 class Keyword(db.Model):
