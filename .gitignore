@@ -21,8 +21,4 @@ env/
 
 # Pliki instalacyjne
 *.exe
-<<<<<<< Updated upstream
 *.msi
-=======
-*.msi
->>>>>>> Stashed changes
