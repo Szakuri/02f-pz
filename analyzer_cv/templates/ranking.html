@@ -32,15 +32,16 @@
         </tr>
     </thead>
     <tbody>
-        {% for candidate in candidates %}
+        {% for i, candidate in enumerate(candidates, start=1) %}
         <tr>
-            <td>{{ loop.index }}</td>
+            <td>{{ i }}</td>
             <td>{{ candidate.name }}</td>
             <td>{{ candidate.points }}</td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
 
 <a href="{{ url_for('home') }}"><button>Wróć</button></a>
 {% endblock %}
