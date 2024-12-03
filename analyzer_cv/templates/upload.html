@@ -1,30 +1,48 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pl">
 
-{% block title %}Prześlij CV{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/stylesPosition.css">
+    <title>Dodaj CV</title>
+</head>
 
-{% block content %}
-<h2>Prześlij CV</h2>
-<form action="/analyze_cv" method="post" enctype="multipart/form-data">
-    <label for="name">Imię i nazwisko:</label>
-    <input type="text" name="name" required>
+<body>
+    <div class="center-container">
+        <div class="content-box">
+            {% extends "base.html" %}
+            {% block title %}Prześlij CV{% endblock %}
+            {% block content %}
 
-    <label for="position_id">Wybierz stanowisko:</label>
-    <select name="position_id" required>
-        <optgroup label="Domyślne stanowiska">
-            {% for position in global_positions %}
-            <option value="{{ position.id }}">{{ position.title }}</option>
-            {% endfor %}
-        </optgroup>
-        <optgroup label="Twoje stanowiska">
-            {% for position in user_positions %}
-            <option value="{{ position.id }}">{{ position.title }}</option>
-            {% endfor %}
-        </optgroup>
-    </select>
+            <h2>Prześlij CV</h2>
+            <form action="/analyze_cv" method="post" enctype="multipart/form-data">
+                <label for="name">Imię i nazwisko:</label>
+                <input type="text" name="name" required>
 
-    <label for="file">Plik CV:</label>
-    <input type="file" name="file" accept=".pdf,.docx" required>
+                <label for="position_id">Wybierz stanowisko:</label>
+                <select name="position_id" required>
+                    <optgroup label="Domyślne stanowiska">
+                        {% for position in global_positions %}
+                        <option value="{{ position.id }}">{{ position.title }}</option>
+                        {% endfor %}
+                    </optgroup>
+                    <optgroup label="Twoje stanowiska">
+                        {% for position in user_positions %}
+                        <option value="{{ position.id }}">{{ position.title }}</option>
+                        {% endfor %}
+                    </optgroup>
+                </select>
 
-    <button type="submit">Analizuj</button>
-</form>
-{% endblock %}
+                <label for="file">Plik CV:</label>
+                <input type="file" name="file" accept=".pdf,.docx" required>
+
+                <button type="submit">Analizuj</button>
+            </form>
+            {% endblock %}
+
+        </div>
+    </div>
+</body>
+
+</html>

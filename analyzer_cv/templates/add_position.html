@@ -4,21 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/stylesPosition.css">
     <title>Dodaj stanowisko</title>
 </head>
 
 <body>
-    <h1>Dodaj nowe stanowisko</h1>
-    <form action="/add_position" method="POST">
-        <label for="title">Nazwa stanowiska:</label><br>
-        <input type="text" id="title" name="title" required><br><br>
+    <div class="center-container">
+        <div class="content-box">
+            <h1>Dodaj nowe stanowisko</h1>
+            <form action="/add_position" method="POST">
+                <label for="title">Nazwa stanowiska:</label>
+                <input type="text" id="title" name="title" required>
 
-        <label for="keywords">Słowa kluczowe (oddzielone przecinkami):</label><br>
-        <input type="text" id="keywords" name="keywords" required><br><br>
+                <label for="keywords">Słowa kluczowe (oddzielone przecinkami):</label>
+                <input type="text" id="keywords" name="keywords" required>
 
-        <button type="submit">Dodaj stanowisko</button>
-    </form>
+                <button type="submit" class="action-button">Dodaj stanowisko</button>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
