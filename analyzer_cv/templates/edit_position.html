@@ -12,7 +12,7 @@
     <div class="center-container">
         <div class="content-box">
             <h1>Edytuj stanowisko</h1>
-            <form action="/add_position" method="POST">
+            <form action="/edit_position/{{ position.id }}" method="POST">
                 <label for="title">Tytuł stanowiska:</label>
                 <input type="text" id="title" name="title" value="{{ position.title }}" required>
 

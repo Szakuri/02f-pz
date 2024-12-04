@@ -1,83 +1,122 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f1ea;
-    color: #4a4a4a;
-    margin: 0;
-    padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f1ea;
+	color: #4a4a4a;
+	margin: 0;
+	padding: 0;
 }
 
 .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
 }
 
 .content-box {
-    background-color: #fff;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    text-align: center;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	max-width: 400px;
+	text-align: center;
 }
 
-h1, h2 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 20px;
+h1,
+h2 {
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 20px;
 }
 
 label {
-    display: block;
-    margin: 10px 0 5px;
-    font-size: 16px;
-    color: #4a4a4a;
+	display: block;
+	margin: 10px 0 5px;
+	font-size: 16px;
+	color: #4a4a4a;
 }
 
-input[type="text"],
-input[type="number"],
-input[type="file"],
+input[type='text'],
+input[type='number'],
+input[type='file'],
 select {
-    width: calc(100% - 20px);  /* Ta sama szerokość dla wszystkich pól */
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    box-sizing: border-box;
+	width: calc(100% - 20px); /* Ta sama szerokość dla wszystkich pól */
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	box-sizing: border-box;
 }
 
 button,
 .action-button {
-    width: calc(100% - 20px);  /* Taka sama szerokość jak pola tekstowe */
-    padding: 10px;
-    background-color: #dcd4c5;
-    color: #4a4a4a;
-    border: 1px solid #b0a999;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    display: block;
-    text-align: center;
-    margin: 10px auto;  /* Wyrównanie do środka */
-    text-decoration: none;
+	width: calc(100% - 20px); /* Taka sama szerokość jak pola tekstowe */
+	padding: 10px;
+	background-color: #dcd4c5;
+	color: #4a4a4a;
+	border: 1px solid #b0a999;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
+	display: block;
+	text-align: center;
+	margin: 10px auto; /* Wyrównanie do środka */
+	text-decoration: none;
 }
 
 button:hover,
 .action-button:hover {
-    background-color: #c8b59e;
-    color: #fff;
+	background-color: #c8b59e;
+	color: #fff;
 }
 
 .flash-messages {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 10px 0;
 }
 
 .flash-messages li {
-    background-color: #ffdddd;
-    color: #a94442;
-    padding: 10px;
-    border
+	background-color: #ffdddd;
+	color: #a94442;
+	padding: 10px;
+	border: 1px;
+}
+
+.table-container {
+	max-width: 80%; /* Ustaw maksymalną szerokość tabeli na 80% szerokości ekranu */
+	margin: 0 auto; /* Wyśrodkuj tabelę */
+}
+
+table {
+	width: 100%; /* Tabela zajmuje całą szerokość kontenera */
+	border-collapse: collapse; /* Usuń odstępy między komórkami */
+}
+
+thead th {
+	background-color: #dcd4c5; /* Dopasowanie do stylu aplikacji */
+	color: #4a4a4a; /* Kolor tekstu */
+	font-weight: bold; /* Wyróżnienie nagłówków */
+	text-align: center; /* Wyśrodkuj nagłówki */
+	padding: 10px;
+}
+
+tbody td {
+	padding: 10px;
+	text-align: center; /* Wyśrodkuj tekst w komórkach */
+	font-size: 16px;
+	border: 1px solid #dcdcdc; /* Dodanie subtelnych granic */
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #f4f1ea; /* Co drugi wiersz w jaśniejszym kolorze */
+}
+
+tbody tr:nth-child(even) {
+	background-color: #ffffff; /* Co drugi wiersz w białym kolorze */
+}
+
+tbody tr:hover {
+	background-color: #eae7dc; /* Podświetlenie wiersza */
+}

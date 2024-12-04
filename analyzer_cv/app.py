@@ -31,7 +31,6 @@ def create_app():
     app.secret_key = os.urandom(24)
     app.secret_key = os.getenv("SECRET_KEY", "domyslny_klucz")
 
-    # Inicjalizacja bazy danych z aplikacją
     db.init_app(app)
     migrate.init_app(app, db)
         
@@ -221,44 +220,34 @@ def create_app():
     @app.route("/ranking", methods=["GET", "POST"])
     def ranking():
         try:
-            # Pobierz listę stanowisk
             positions = Position.query.all()
-
-            # Domyślne stanowisko (pierwsze w bazie lub wybrane w formularzu)
             position_id = request.args.get("position_id", type=int) or positions[0].id
-
-            # Pobierz parametr liczby wyników z URL (domyślnie 20)
             limit = request.args.get("limit", default=20, type=int)
+            limit = max(1, min(limit, 50))  # Upewnij się, że limit mieści się w przedziale 1-50
 
-            # Walidacja limitu
-            if limit < 1:
-                limit = 1
-            elif limit > 50:
-                limit = 50
-
-            # Pobierz stanowisko
             position = Position.query.get_or_404(position_id)
-
-            # Pobierz kandydatów dla stanowiska i posortuj ich według punktów malejąco
             candidates = (
                 Candidate.query.filter_by(position_id=position_id)
+                .filter(Candidate.points.isnot(None))
                 .order_by(Candidate.points.desc())
                 .limit(limit)
                 .all()
             )
 
-            # Renderowanie rankingu
+            # Przygotowanie listy z indeksem w Pythonie
+            candidates_with_index = list(enumerate(candidates, start=1))
+
             return render_template(
                 "ranking.html",
                 positions=positions,
                 position=position,
-                candidates=candidates,
+                candidates_with_index=candidates_with_index,
                 limit=limit,
             )
-
         except Exception as e:
             flash(f"Wystąpił błąd: {str(e)}")
             return redirect(url_for("home"))
+        
         
     @app.route("/edit_position/<int:position_id>", methods=["GET", "POST"])
     def edit_position(position_id):

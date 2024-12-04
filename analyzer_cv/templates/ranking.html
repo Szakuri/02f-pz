@@ -33,25 +33,26 @@
                 <button type="submit">Pokaż ranking</button>
             </form>
 
-            <!-- Tabela z rankingiem -->
-            <table>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Imię i nazwisko</th>
-                    <th>Punkty</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for i, candidate in enumerate(sorted(candidates, key=lambda x: x.points, reverse=True), start=1) %}
-                <tr>
-                    <td>{{ i }}</td>
-                    <td>{{ candidate.name }}</td>
-                    <td>{{ candidate.points }}</td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Imię i nazwisko</th>
+                            <th>Punkty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i, candidate in candidates_with_index %}
+                        <tr>
+                            <td>{{ i }}</td>
+                            <td>{{ candidate.name }}</td>
+                            <td>{{ candidate.points }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
             <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
             {% endblock %}

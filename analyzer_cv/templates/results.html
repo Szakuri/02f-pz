@@ -7,6 +7,7 @@
     <title>Wyniki Analizy CV</title>
     <link rel="stylesheet" href="../static/stylesResult.css">
 </head>
+
 <body>
 
     <div class="center-container">
@@ -19,30 +20,31 @@
             <h3>Łączna liczba punktów: {{ total_score }}</h3>
 
             <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
-
-            <table class="analysis-table">
-                <thead>
-                    <tr>
-                        <th>Słowo kluczowe</th>
-                        <th>Ilość wystąpień</th>
-                        <th>Waga</th>
-                        <th>Punkty</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for keyword, data in results.items() %}
-                    <tr>
-                        <td>{{ keyword }}</td>
-                        <td>{{ data.count }}</td>
-                        <td>{{ data.weight }}</td>
-                        <td>{{ data.points }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="table-container">
+                <table class="analysis-table">
+                    <thead>
+                        <tr>
+                            <th>Słowo kluczowe</th>
+                            <th>Ilość wystąpień</th>
+                            <th>Waga</th>
+                            <th>Punkty</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for keyword, data in results.items() %}
+                        <tr>
+                            <td>{{ keyword }}</td>
+                            <td>{{ data.count }}</td>
+                            <td>{{ data.weight }}</td>
+                            <td>{{ data.points }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}
 </body>
 
 </html>
