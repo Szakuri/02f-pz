@@ -4,21 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="../static/stylesLogin.css">
     <title>{% block title %}Aplikacja CV{% endblock %}</title>
 </head>
 
 <body>
-    <header>
+    <header class="main-header">
         <h1>Witamy w Aplikacji CV</h1>
     </header>
 
-    <main>
+    <main class="main-content">
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer>
+    <footer class="main-footer">
         <p>&copy; 2024 Aplikacja CV. Wszelkie prawa zastrzeżone.</p>
     </footer>
 </body>

@@ -4,20 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/stylesPosition.css">
     <title>Twoje Stanowiska</title>
 </head>
 
 <body>
-    <h1>Twoje Stanowiska</h1>
-    <ul>
-        {% for position in positions %}
-        <li>
-            {{ position.title }} - <a href="{{ url_for('edit_position', position_id=position.id) }}">Edytuj</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <a href="/">Wróć</a>
+    <div class="center-container">
+        <div class="content-box">
+            <h1>Twoje Stanowiska</h1>
+            <ul class="positions-list">
+                {% for position in positions %}
+                <li>
+                    {{ position.title }} - <a href="{{ url_for('edit_position', position_id=position.id) }}" class="edit-link">Edytuj</a>
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="/" class="action-button">Wróć</a>
+        </div>
+    </div>
 </body>
 
 </html>

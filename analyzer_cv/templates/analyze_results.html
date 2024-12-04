@@ -5,62 +5,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wyniki Analizy CV</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/stylesPosition.css">
 </head>
 
-<body class="bg-light">
-    <div class="container mt-5">
-        <h1 class="text-center text-primary">Wyniki Analizy CV</h1>
+<body>
+    <div class="center-container">
+        <div class="content-box">
+            <h1>Wyniki Analizy CV</h1>
 
-        <!-- Karuzela -->
-        <div id="resultsCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                {% for result in results %}
-                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-                    <div class="card shadow">
-                        <div class="card-header bg-primary text-white">
-                            <h3>Analiza CV dla: <strong>{{ result.name }}</strong></h3>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered table-striped">
-                                <thead class="table-primary">
-                                    <tr>
-                                        <th>Słowo kluczowe</th>
-                                        <th>Wystąpienia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for keyword, count in result.analysis.items() %}
-                                    <tr>
-                                        <td>{{ keyword }}</td>
-                                        <td>{{ count }}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                            <div class="mt-4">
-                                <h4>Całkowity wynik: <span class="badge bg-success">{{ result.total_score }}</span></h4>
+            <!-- Karuzela -->
+            <div id="resultsCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for result in results %}
+                    <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                        <div class="card shadow">
+                            <div class="card-header bg-primary text-white">
+                                <h3>Analiza CV dla: <strong>{{ result.name }}</strong></h3>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="table-primary">
+                                        <tr>
+                                            <th>Słowo kluczowe</th>
+                                            <th>Wystąpienia</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for keyword, count in result.analysis.items() %}
+                                        <tr>
+                                            <td>{{ keyword }}</td>
+                                            <td>{{ count }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                                <div class="mt-4">
+                                    <h4>Całkowity wynik: <span class="badge bg-success">{{ result.total_score }}</span></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
 
-            <!-- Przyciski nawigacji -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#resultsCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Poprzedni</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#resultsCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Następny</span>
-            </button>
+                <!-- Przyciski nawigacji -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#resultsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Poprzedni</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#resultsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Następny</span>
+                </button>
+            </div>
+            <a href="/" class="action-button">Powrót do strony głównej</a>
         </div>
-        <a href="/" class="btn btn-primary mt-4">Powrót do strony głównej</a>
     </div>
 
-    <footer class="text-center mt-5 py-3 bg-primary text-white">
+    <footer class="main-footer">
         <p>&copy; 2024 Analyzer CV - Wszystkie prawa zastrzeżone</p>
     </footer>
 

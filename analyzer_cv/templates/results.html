@@ -1,33 +1,48 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pl">
 
-{% block title %}Wyniki Analizy{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wyniki Analizy CV</title>
+    <link rel="stylesheet" href="../static/stylesResult.css">
+</head>
+<body>
 
-{% block content %}
-<h2>Wyniki analizy dla: {{ name }}</h2>
-<h3>Łączna liczba punktów: {{ total_score }}</h3>
+    <div class="center-container">
+        <div class="content-box">
+            <h1>{% extends "base.html" %}</h1>
+            <h2>{% block title %}Wyniki Analizy{% endblock %}</h2>
+            <h3>{% block content %}</h3>
 
-<a href="{{ url_for('home') }}"><button>Wróć</button></a>
+            <h2>Wyniki analizy dla: {{ name }}</h2>
+            <h3>Łączna liczba punktów: {{ total_score }}</h3>
 
-<table>
-    <thead>
-        <tr>
-            <th>Słowo kluczowe</th>
-            <th>Ilość wystąpień</th>
-            <th>Waga</th>
-            <th>Punkty</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for keyword, data in results.items() %}
-        <tr>
-            <td>{{ keyword }}</td>
-            <td>{{ data.count }}</td>
-            <td>{{ data.weight }}</td>
-            <td>{{ data.points }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+            <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
 
-
+            <table class="analysis-table">
+                <thead>
+                    <tr>
+                        <th>Słowo kluczowe</th>
+                        <th>Ilość wystąpień</th>
+                        <th>Waga</th>
+                        <th>Punkty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for keyword, data in results.items() %}
+                    <tr>
+                        <td>{{ keyword }}</td>
+                        <td>{{ data.count }}</td>
+                        <td>{{ data.weight }}</td>
+                        <td>{{ data.points }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
+</body>
+
+</html>
