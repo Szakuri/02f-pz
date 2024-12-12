@@ -38,7 +38,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Nazwa</th>
                             <th>Imię i nazwisko</th>
+                            <th>E-mail</th>
+                            <th>Numer telefonu</th>
                             <th>Punkty</th>
                         </tr>
                     </thead>
@@ -47,6 +50,9 @@
                         <tr>
                             <td>{{ i }}</td>
                             <td>{{ candidate.name }}</td>
+                            <td>{{ candidate.first_words }}</td>
+                            <td>{{ candidate.email_cv or "Nie znaleziono" }}</td>
+                            <td>{{ candidate.phone_number or "Nie znaleziono" }}</td>
                             <td>{{ candidate.points }}</td>
                         </tr>
                         {% endfor %}

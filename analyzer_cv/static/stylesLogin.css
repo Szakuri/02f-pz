@@ -1,115 +1,115 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f1ea;
-    color: #4a4a4a;
-    margin: 0;
-    padding: 0;
+	font-family: Arial, sans-serif;
+	background-color: #f4f1ea;
+	color: #4a4a4a;
+	margin: 0;
+	padding: 0;
 }
 
 .center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 
 .content-box {
-    background-color: #fff;
-    border: 1px solid #dcdcdc;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 400px;
-    text-align: center;
+	background-color: #fff;
+	border: 1px solid #dcdcdc;
+	border-radius: 8px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 20px;
+	max-width: 1600px;
+	text-align: center;
 }
 
 h1 {
-    font-size: 24px;
-    color: #333;
-    margin-bottom: 10px;
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 10px;
 }
 
 p {
-    font-size: 18px;
-    color: #666;
+	font-size: 18px;
+	color: #666;
 }
 
 label {
-    display: block;
-    margin: 10px 0 5px;
-    font-size: 16px;
-    color: #4a4a4a;
+	display: block;
+	margin: 10px 0 5px;
+	font-size: 16px;
+	color: #4a4a4a;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #dcdcdc;
-    border-radius: 5px;
-    box-sizing: border-box;
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+	width: calc(100% - 20px);
+	padding: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #dcdcdc;
+	border-radius: 5px;
+	box-sizing: border-box;
 }
 
 button {
-    width: calc(100% - 20px);
-    padding: 10px;
-    background-color: #dcd4c5;
-    color: #4a4a4a;
-    border: 1px solid #b0a999;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+	width: calc(100% - 20px);
+	padding: 10px;
+	background-color: #dcd4c5;
+	color: #4a4a4a;
+	border: 1px solid #b0a999;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s, color 0.3s;
 }
 
 button:hover {
-    background-color: #c8b59e;
-    color: #fff;
+	background-color: #c8b59e;
+	color: #fff;
 }
 
 .flash-messages {
-    list-style-type: none;
-    padding: 0;
-    margin: 10px 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 10px 0;
 }
 
 .flash-messages li {
-    background-color: #ffdddd;
-    color: #a94442;
-    padding: 10px;
-    border: 1px solid #ebccd1;
-    border-radius: 5px;
-    margin-bottom: 10px;
+	background-color: #ffdddd;
+	color: #a94442;
+	padding: 10px;
+	border: 1px solid #ebccd1;
+	border-radius: 5px;
+	margin-bottom: 10px;
 }
 
 a {
-    color: #4a90e2;
-    text-decoration: none;
-    transition: color 0.3s;
+	color: #4a90e2;
+	text-decoration: none;
+	transition: color 0.3s;
 }
 
 a:hover {
-    color: #0056b3;
+	color: #0056b3;
 }
 
 .main-header {
-    background-color: #dcd4c5;
-    color: #333;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 1px solid #b0a999;
+	background-color: #dcd4c5;
+	color: #333;
+	padding: 20px;
+	text-align: center;
+	border-bottom: 1px solid #b0a999;
 }
 
 .main-content {
-    padding: 20px;
-    text-align: center;
+	padding: 20px;
+	text-align: center;
 }
 
 .main-footer {
-    background-color: #dcd4c5;
-    color: #333;
-    padding: 10px;
-    text-align: center;
-    border-top: 1px solid #b0a999;
+	background-color: #dcd4c5;
+	color: #333;
+	padding: 10px;
+	text-align: center;
+	border-top: 1px solid #b0a999;
 }

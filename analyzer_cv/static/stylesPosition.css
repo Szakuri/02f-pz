@@ -85,8 +85,13 @@ button:hover,
 }
 
 .table-container {
-	max-width: 80%; /* Ustaw maksymalną szerokość tabeli na 80% szerokości ekranu */
-	margin: 0 auto; /* Wyśrodkuj tabelę */
+	max-height: 500px; /* Ograniczenie wysokości tabeli */
+	overflow-y: auto; /* Przewijanie w pionie */
+	border: 1px solid #ddd; /* Obramowanie dla tabeli */
+	margin: 20px auto;
+	width: 90%;
+	text-align: center; 
+	background-color: #fff;
 }
 
 table {

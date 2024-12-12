@@ -14,10 +14,77 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from pytesseract import image_to_string
 from pdf2image import convert_from_path
 import os
+import unicodedata
+import re
 
 # Inicjalizacja bazy danych
 db = SQLAlchemy()
 migrate = Migrate()
+
+
+def remove_diacritics(text):
+    return ''.join(
+        c for c in unicodedata.normalize('NFD', text)
+        if unicodedata.category(c) != 'Mn'
+    )
+
+def extract_email_from_cv_text(text):
+    """
+    Wyodrębnia adres e-mail z tekstu CV.
+    """
+    email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+    match = re.search(email_pattern, text)
+    return match.group(0) if match else None
+
+
+def extract_name_from_cv_text(text, max_lines=60):
+    """
+    Wyodrębnia imię i nazwisko zapisane wielkimi literami z tekstu CV, ignorując liczby lub inne przeszkadzające elementy.
+    """
+    # Normalizacja i podział tekstu na linie, usuwając puste linie
+    normalized_text = remove_diacritics(text)
+    lines = [line.strip() for line in normalized_text.strip().split("\n") if line.strip()]
+
+    # Lista słów kluczowych do ignorowania
+    ignore_keywords = {
+        "LANGUAGES", "SKILLS", "EDUCATION", "REFERENCES", "CONTACT", "PROFILE",
+        "O MNIE", "ABOUT ME", "KONTAKT", "ADRES", "CERTYFIKATY", "CERTIFICATES",
+        "JĘZYKI", "JEZYKI", "EDUKACJA", "DOŚWIADCZENIE", "EXPERIENCE",
+        "UMIEJĘTNOŚCI", "UMIEJETNOSCI", "UNIVERSITY", "COLLEGE", "INSTITUTE", "SZKOLA", "UNIWERSYTET", "LICEUM", "TECHNIKUM"
+    }
+
+    for i, line in enumerate(lines[:max_lines]):
+        # Ignoruj linie zawierające słowa kluczowe do ignorowania
+        if any(keyword in line for keyword in ignore_keywords):
+            continue
+
+        # Usuń cyfry i inne przeszkadzające elementy przed analizą regex
+        cleaned_line = re.sub(r"\d+|[^A-Z\s]", "", line).strip()
+
+        # Przypadek: Imię i nazwisko w jednej linii
+        match = re.match(r"^([A-Z]{2,})\s+([A-Z]{2,})$", cleaned_line)
+        if match:
+            return f"{match.group(1)} {match.group(2)}"
+
+        # Przypadek: Imię i nazwisko w dwóch kolejnych liniach, ignorując liczby i zakłócenia
+        if i + 1 < len(lines):
+            cleaned_next_line = re.sub(r"\d+|[^A-Z\s]", "", lines[i + 1]).strip()
+            if line.isupper() and cleaned_next_line.isupper():
+                return f"{line} {lines[i + 1]}"
+
+    # Jeśli nie znaleziono imienia i nazwiska
+    return "Nierozpoznane"
+
+    
+    # Jeśli nie znaleziono imienia i nazwiska
+    return "Nierozpoznane"
+
+def extract_phone_from_cv_text(text):
+    phone_pattern = r'(?:\+?\d{1,3}[ -]?)?(?:\(?\d{1,4}\)?[ -]?)?\d{3,4}[ -]?\d{3,4}[ -]?\d{3,4}'
+    match = re.search(phone_pattern, text)
+    return match.group(0) if match else None
+
+
 
 
 # Funkcja do tworzenia aplikacji
@@ -86,7 +153,7 @@ def create_app():
     def analyze_cv():
         try:
             # Pobierz dane z formularza
-            name = request.form["name"]
+            user_input_name = request.form["name"]  # Wartość wpisana przez użytkownika
             position_id = int(request.form["position_id"])
             file = request.files["file"]
 
@@ -105,34 +172,46 @@ def create_app():
                 flash(f"Błąd podczas wyodrębniania tekstu z PDF: {str(e)}")
                 return redirect(url_for("upload"))
 
-            # Normalizacja tekstu
-            normalized_text = extracted_text.lower()
+            # Wyciągnięcie imienia i nazwiska z CV
+            first_words = extract_name_from_cv_text(extracted_text)
+            email_cv = extract_email_from_cv_text(extracted_text)
+            phone_number = extract_phone_from_cv_text(extracted_text)
+
+
+            # Normalizacja tekstu i usunięcie znaków diakrytycznych
+            normalized_text = remove_diacritics(extracted_text).lower()
 
             # Analiza słów kluczowych
             results = {}
             total_score = 0
             for keyword in keywords:
-                count = normalized_text.count(keyword.word.lower())
+                keyword_normalized = remove_diacritics(keyword.word).lower()
+                count = normalized_text.count(keyword_normalized)
                 points = count * keyword.weight  # Uwzględnienie wagi
                 results[keyword.word] = {"count": count, "weight": keyword.weight, "points": points}
                 total_score += points
 
-            # Zapis kandydata do bazy danych z punktami
+            # Zapis kandydata do bazy danych
             candidate = Candidate(
-                name=name,
+                name=user_input_name,  # Wpisana przez użytkownika nazwa
+                first_words=first_words,  # Wyodrębnione imię i nazwisko
                 cv_text=extracted_text,
+                email_cv=email_cv,
+                phone_number=phone_number,
                 position_id=position_id,
-                points=total_score  # Zapis liczby punktów
+                points=total_score,
+                user_id=session.get("user_id")
             )
             db.session.add(candidate)
             db.session.commit()
 
             # Renderowanie wyników
-            return render_template("results.html", name=name, results=results, total_score=total_score)
+            return render_template("results.html", name=user_input_name, results=results, total_score=total_score)
 
         except Exception as e:
             flash(f"Wystąpił błąd: {str(e)}")
             return redirect(url_for("upload"))
+
 
     @app.route("/add_position", methods=["GET", "POST"])
     def add_position_form():
@@ -228,11 +307,13 @@ def create_app():
             position = Position.query.get_or_404(position_id)
             candidates = (
                 Candidate.query.filter_by(position_id=position_id)
+                .filter((Candidate.user_id == session.get("user_id")) | (Candidate.user_id.is_(None)))  
                 .filter(Candidate.points.isnot(None))
                 .order_by(Candidate.points.desc())
                 .limit(limit)
                 .all()
-            )
+                )
+
 
             # Przygotowanie listy z indeksem w Pythonie
             candidates_with_index = list(enumerate(candidates, start=1))
@@ -626,20 +707,20 @@ def create_default_positions():
     ]
 
     for pos in default_positions:
-        # Sprawdź, czy stanowisko już istnieje
         if not Position.query.filter_by(title=pos["title"], is_default=True).first():
             position = Position(title=pos["title"], is_default=True)
             db.session.add(position)
             db.session.commit()
 
-            # Dodaj słowa kluczowe z wagami
             for keyword in pos["keywords"]:
-                kw = Keyword(
-                    word=keyword["word"],
-                    weight=keyword["weight"],
-                    position_id=position.id,
-                )
-                db.session.add(kw)
+                # Sprawdź, czy słowo kluczowe już istnieje
+                if not Keyword.query.filter_by(word=keyword["word"], position_id=position.id).first():
+                    kw = Keyword(
+                        word=keyword["word"],
+                        weight=keyword["weight"],
+                        position_id=position.id,
+                    )
+                    db.session.add(kw)
 
     db.session.commit()
 

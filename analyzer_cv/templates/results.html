@@ -16,7 +16,10 @@
             <h2>{% block title %}Wyniki Analizy{% endblock %}</h2>
             <h3>{% block content %}</h3>
 
-            <h2>Wyniki analizy dla: {{ name }}</h2>
+            <h2>Wyniki analizy dla:</h2>
+            <p>Wprowadzona nazwa: {{ name }}</p>
+            <h3>Adres e-mail: {{ email_cv or "Nie znaleziono" }}</h3>
+            <p>Imię i nazwisko: {{ first_words }}</p>
             <h3>Łączna liczba punktów: {{ total_score }}</h3>
 
             <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
