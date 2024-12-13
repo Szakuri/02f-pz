@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: gunicorn analyzer_cv.wsgi:app
+  web: gunicorn wsgi:app

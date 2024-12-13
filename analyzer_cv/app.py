@@ -103,7 +103,7 @@ def create_app():
         
     # Importowanie modeli
     with app.app_context():
-        from models import Position, Keyword, Candidate, User
+        from analyzer_cv.models import Position, Keyword, Candidate, User
         db.create_all() 
         create_default_positions()
 
@@ -371,7 +371,7 @@ def create_app():
     return app
 
 def create_default_positions():
-    from models import Position, Keyword
+    from analyzer_cv.models import Position, Keyword
 
     Position.query.filter_by(is_default=True).delete()
     db.session.commit()
@@ -723,10 +723,3 @@ def create_default_positions():
                     db.session.add(kw)
 
     db.session.commit()
-
-
-
-# Uruchamianie aplikacji
-if __name__ == "__main__":
-    app = create_app()
-    app.run(debug=True) 

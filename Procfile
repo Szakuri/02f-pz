@@ -1,1 +1,1 @@
-web: gunicorn analyzer_cv.wsgi:app --log-file=-
+web: gunicorn wsgi:app --log-file=-
