@@ -1,0 +1,49 @@
+Project nasz_projekt {
+  database_type: 'MySQL'
+}
+
+Table users {
+  id int [pk]
+  username varchar(100) [unique, not null]
+  email varchar(100) [unique, not null]
+  password_hash varchar(128) [not null]
+
+  Note: "Stores user details including hashed password."
+}
+
+Table positions {
+  id int [pk]
+  title varchar(100) [not null]
+  is_default boolean [default: false]
+  user_id int
+
+  Note: "Represents job positions. Linked to users."
+}
+
+Table keywords {
+  id int [pk]
+  word varchar(50) [not null]
+  position_id int [not null]
+  weight int [default: 1]
+
+  Note: "Keywords associated with positions."
+}
+
+Table candidates {
+  id int [pk]
+  name varchar(100) [not null]
+  cv_text text [not null]
+  position_id int [not null]
+  points int [default: 0]
+  first_words varchar(100)
+  email_cv varchar(120)
+  phone_number varchar(20)
+  user_id int [not null]
+
+  Note: "Candidate data including contact and associated position."
+}
+
+Ref: positions.user_id > users.id
+Ref: keywords.position_id > positions.id
+Ref: candidates.position_id > positions.id
+Ref: candidates.user_id > users.id
