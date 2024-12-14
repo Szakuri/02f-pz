@@ -1,7 +1,6 @@
 # Projekt_Zespolowy_02F
 Projekt tworzony w zespole pięcioosobowym, w celu zaliczenia przedmiotu na studiach.
 
-
 # Automatyczna Analiza CV i Rekomendacja Kandydatów
 
 ## Opis projektu
@@ -20,7 +19,6 @@ Projekt został opracowany w ramach zespołowego zadania na studiach przez pięc
     - Imię i nazwisko,
     - Adres e-mail,
     - Numer telefonu,
-    - Doświadczenie i umiejętności.
 - **Dopasowanie do stanowisk**: Na podstawie słów kluczowych przypisanych do stanowiska system generuje punktację dla CV.
 - **Zarządzanie stanowiskami**:
   - Dodawanie nowych stanowisk i przypisywanie do nich słów kluczowych z wagami.
@@ -55,12 +53,9 @@ Projekt został opracowany w ramach zespołowego zadania na studiach przez pięc
 ### **Infrastruktura i narzędzia**
 - **Heroku**: Platforma chmurowa do wdrażania aplikacji.
 - **GitHub**: Kontrola wersji i współpraca zespołowa.
-- **Docker** (opcjonalnie): Możliwość konteneryzacji aplikacji.
+- **Docker**: Możliwość konteneryzacji aplikacji.
 - **Tesseract OCR**: Narzędzie zewnętrzne do przetwarzania tekstu z obrazów.
 - **Pipenv** lub **virtualenv**: Zarządzanie środowiskiem wirtualnym Python.
-
-### **Testowanie**
-- **pytest**: Framework do testów jednostkowych i integracyjnych.
 
 ---
 
