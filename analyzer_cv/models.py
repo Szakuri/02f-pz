@@ -8,9 +8,9 @@ class Position(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     is_default = db.Column(db.Boolean, default=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))  # Klucz obcy do tabeli User
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-    user = db.relationship("User", back_populates="positions")  # Relacja do User
+    user = db.relationship("User", back_populates="positions")
     keywords = db.relationship("Keyword", back_populates="position", cascade="all, delete-orphan")
 
 
@@ -20,7 +20,7 @@ class Keyword(db.Model):
     position_id = db.Column(db.Integer, db.ForeignKey("position.id"), nullable=False)
     weight = db.Column(db.Integer, nullable=False, default=1)
 
-    position = db.relationship("Position", back_populates="keywords")  # Relacja z Position
+    position = db.relationship("Position", back_populates="keywords") 
 
 
 class Candidate(db.Model):
@@ -33,6 +33,7 @@ class Candidate(db.Model):
     email_cv = db.Column(db.String(120), nullable=True)
     phone_number = db.Column(db.String(20), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    path = db.Column(db.String(255))
 
     user = db.relationship("User", back_populates="candidates")
 

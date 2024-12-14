@@ -8,20 +8,34 @@ body {
 
 .center-container {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
+	padding: 20px;
+	box-sizing: border-box;
 }
 
 .content-box {
+	overflow: hidden;
+	overflow-y: auto;
+	max-height: calc(100vh - 40px);
+	padding: 20px;
+	margin: 20px;
+	width: 100%;
 	background-color: #fff;
 	border: 1px solid #dcdcdc;
 	border-radius: 8px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	max-width: 800px; /* Zwiększona szerokość dla lepszego wyświetlania */
 	text-align: center;
-	margin: 20px;
+}
+
+.table-container {
+	max-height: calc(100vh - 200px); 
+	overflow-y: auto; 
+	overflow-x: auto;
+	margin-bottom: 20px;
+	border: 1px solid #ddd;
 }
 
 h1,
@@ -40,7 +54,7 @@ label {
 
 input[type='text'],
 input[type='number'] {
-	width: calc(100% - 20px); /* Ta sama szerokość dla wszystkich pól */
+	width: calc(100% - 20px);
 	padding: 10px;
 	margin-bottom: 15px;
 	border: 1px solid #dcdcdc;
@@ -50,7 +64,7 @@ input[type='number'] {
 
 button,
 .action-button {
-	width: calc(100% - 20px); /* Taka sama szerokość jak pola tekstowe */
+	width: calc(100% - 20px);
 	padding: 10px;
 	background-color: #dcd4c5;
 	color: #4a4a4a;
@@ -60,7 +74,7 @@ button,
 	transition: background-color 0.3s, color 0.3s;
 	display: block;
 	text-align: center;
-	margin: 10px auto; /* Wyrównanie do środka */
+	margin: 10px auto;
 	text-decoration: none;
 }
 
@@ -97,10 +111,10 @@ table.analysis-table tbody tr:nth-child(even) {
 }
 
 .table-container {
-	max-height: 500px; /* Ograniczenie wysokości tabeli */
-	overflow-y: auto; /* Przewijanie w pionie */
-	border: 1px solid #ddd; /* Obramowanie dla estetyki */
-	margin-bottom: 20px; /* Margines dla przestrzeni */
+	max-height: 500px; 
+	overflow-y: auto; 
+	border: 1px solid #ddd; 
+	margin-bottom: 20px; 
 }
 
 .flash-messages {
@@ -119,7 +133,7 @@ table.analysis-table tbody tr:nth-child(even) {
 }
 
 .keywords-list {
-	list-style-type: none; /* Usuwa kropki z listy słów kluczowych */
+	list-style-type: none; 
 	padding: 0;
 	margin: 10px 0;
 }
@@ -129,7 +143,7 @@ table.analysis-table tbody tr:nth-child(even) {
 }
 
 .positions-list {
-	list-style-type: none; /* Usuwa kropki z listy */
+	list-style-type: none; 
 	padding: 0;
 	margin: 20px 0;
 }
@@ -160,10 +174,17 @@ a:hover {
 	color: #0056b3;
 }
 
-.main-footer {
-	background-color: #dcd4c5;
-	color: #333;
-	padding: 10px;
-	text-align: center;
-	border-top: 1px solid #b0a999;
+#details-section {
+	margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+	.content-box {
+		padding: 10px; 
+	}
+
+	.analysis-table th,
+	.analysis-table td {
+		font-size: 14px; 
+	}
 }

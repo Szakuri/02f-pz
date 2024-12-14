@@ -51,7 +51,7 @@ select {
 
 button,
 .action-button {
-	width: calc(100% - 20px); /* Taka sama szerokość jak pola tekstowe */
+	width: calc(100% - 20px);
 	padding: 10px;
 	background-color: #dcd4c5;
 	color: #4a4a4a;
@@ -61,14 +61,24 @@ button,
 	transition: background-color 0.3s, color 0.3s;
 	display: block;
 	text-align: center;
-	margin: 10px auto; /* Wyrównanie do środka */
+	margin: 10px auto;
 	text-decoration: none;
+	font-size: 16px; /* Ujednolicenie wielkości tekstu */
+	font-family: inherit; /* Spójność czcionki */
+	box-sizing: border-box; /* Zapobiega różnicom w wymiarach */
 }
 
 button:hover,
 .action-button:hover {
 	background-color: #c8b59e;
 	color: #fff;
+}
+
+button {
+	appearance: none; /* Usuwa domyślne style przeglądarki dla przycisków */
+	border: none; /* Usuwa wbudowane obramowanie */
+	text-align: center;
+	justify-content: center;
 }
 
 .flash-messages {
@@ -85,43 +95,83 @@ button:hover,
 }
 
 .table-container {
-	max-height: 500px; /* Ograniczenie wysokości tabeli */
-	overflow-y: auto; /* Przewijanie w pionie */
-	border: 1px solid #ddd; /* Obramowanie dla tabeli */
+	max-height: 500px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
 	margin: 20px auto;
 	width: 90%;
-	text-align: center; 
+	text-align: center;
 	background-color: #fff;
 }
 
+.positions-list {
+	list-style-type: none; /* Usunięcie kropek */
+	padding: 0;
+	margin: 0;
+}
+
+.positions-list li {
+	display: flex; /* Ustawienie elementów w linii */
+	justify-content: space-between; /* Rozdzielenie nazwy stanowiska i przycisku */
+	align-items: center; /* Wyrównanie elementów w pionie */
+	padding: 10px 0; /* Dodanie przestrzeni między wierszami */
+	border-bottom: 1px solid #dcdcdc; /* Dodanie delikatnej linii oddzielającej */
+}
+
+.position-title {
+	font-size: 16px; /* Rozmiar czcionki dla nazwy stanowiska */
+	color: #4a4a4a; /* Kolor czcionki */
+}
+
+.edit-button,
+.delete-button {
+	width: auto; /* Dopasowanie szerokości do treści */
+	padding: 5px 10px; /* Zmniejszenie paddingu dla lepszego dopasowania */
+	font-size: 14px; /* Zmniejszenie rozmiaru czcionki */
+}
+
+.delete-button {
+	background-color: #e57373;
+	color: #fff;
+	border: 1px solid #d32f2f;
+}
+
+.delete-button:hover {
+	background-color: #d32f2f; /* Ciemniejszy czerwony kolor po najechaniu */
+}
+
+.delete-candit {
+	background-color: #d32f2f;
+}
+
 table {
-	width: 100%; /* Tabela zajmuje całą szerokość kontenera */
-	border-collapse: collapse; /* Usuń odstępy między komórkami */
+	width: 100%;
+	border-collapse: collapse;
 }
 
 thead th {
-	background-color: #dcd4c5; /* Dopasowanie do stylu aplikacji */
-	color: #4a4a4a; /* Kolor tekstu */
-	font-weight: bold; /* Wyróżnienie nagłówków */
-	text-align: center; /* Wyśrodkuj nagłówki */
+	background-color: #dcd4c5;
+	color: #4a4a4a;
+	font-weight: bold;
+	text-align: center;
 	padding: 10px;
 }
 
 tbody td {
 	padding: 10px;
-	text-align: center; /* Wyśrodkuj tekst w komórkach */
+	text-align: center;
 	font-size: 16px;
-	border: 1px solid #dcdcdc; /* Dodanie subtelnych granic */
+	border: 1px solid #dcdcdc;
 }
 
 tbody tr:nth-child(odd) {
-	background-color: #f4f1ea; /* Co drugi wiersz w jaśniejszym kolorze */
+	background-color: #f4f1ea;
 }
 
 tbody tr:nth-child(even) {
-	background-color: #ffffff; /* Co drugi wiersz w białym kolorze */
+	background-color: #ffffff;
 }
 
 tbody tr:hover {
-	background-color: #eae7dc; /* Podświetlenie wiersza */
+	background-color: #eae7dc;
 }

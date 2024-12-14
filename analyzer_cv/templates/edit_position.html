@@ -6,6 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/stylesPosition.css">
     <title>Edytuj stanowisko</title>
+    <script>
+        function removeKeyword(button, keywordId) {
+            const li = button.parentElement;
+            li.remove();
+            const form = document.querySelector('form');
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'deleted_keywords';
+            input.value = keywordId;
+            form.appendChild(input);
+        }
+
+
+        function addKeyword() {
+            const keywordInput = document.getElementById('new-keyword');
+            const weightInput = document.getElementById('new-weight');
+
+            const keyword = keywordInput.value.trim();
+            const weight = weightInput.value.trim();
+
+            if (!keyword || isNaN(weight) || weight < 1 || weight > 5) {
+                alert('Podaj poprawne słowo kluczowe i wagę (1-5).');
+                return;
+            }
+
+            const keywordsList = document.querySelector('.keywords-list');
+            const newLi = document.createElement('li');
+
+            newLi.innerHTML = `
+            <input type="text" name="new_keywords[]" value="${keyword}" required>
+            <input type="number" name="new_weights[]" value="${weight}" min="1" max="5" required>
+            <button type="button" onclick="removeKeyword(this)">Usuń</button>
+        `;
+
+            keywordsList.appendChild(newLi);
+
+            keywordInput.value = '';
+            weightInput.value = '';
+        }
+
+        function removeKeyword(button) {
+            const li = button.parentElement;
+            li.remove();
+        }
+    </script>
 </head>
 
 <body>
@@ -20,14 +65,21 @@
                 <ul class="keywords-list">
                     {% for keyword in keywords %}
                     <li>
-                        <strong>{{ keyword.word }}</strong>
-                        <!-- Ukryte pole na keyword_id -->
+                        <input type="text" name="keyword_words" value="{{ keyword.word }}" required>
                         <input type="hidden" name="keyword_ids" value="{{ keyword.id }}">
-                        <!-- Pole na wagę -->
                         <input type="number" name="weights" value="{{ keyword.weight }}" min="1" max="5" required>
+                        <button type="button" onclick="removeKeyword(this, '{{ keyword.id }}')">Usuń</button>
                     </li>
                     {% endfor %}
                 </ul>
+                <div>
+                    <h3>Dodaj nowe słowo kluczowe</h3>
+                    <label for="new-keyword">Słowo kluczowe:</label>
+                    <input type="text" id="new-keyword" placeholder="Wpisz nowe słowo kluczowe">
+                    <label for="new-weight">Waga:</label>
+                    <input type="number" id="new-weight" min="1" max="5" placeholder="1-5">
+                    <button type="button" onclick="addKeyword()">Dodaj</button>
+                </div>
 
                 <button type="submit" class="action-button">Zapisz zmiany</button>
             </form>

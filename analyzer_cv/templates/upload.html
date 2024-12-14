@@ -24,12 +24,16 @@
                 <select name="position_id" required>
                     <optgroup label="Domyślne stanowiska">
                         {% for position in global_positions %}
-                        <option value="{{ position.id }}">{{ position.title }}</option>
+                        <option value="{{ position.id }}" {% if position.id==last_position_id %}selected{% endif %}>
+                            {{ position.title }}
+                        </option>
                         {% endfor %}
                     </optgroup>
                     <optgroup label="Twoje stanowiska">
                         {% for position in user_positions %}
-                        <option value="{{ position.id }}">{{ position.title }}</option>
+                        <option value="{{ position.id }}" {% if position.id==last_position_id %}selected{% endif %}>
+                            {{ position.title }}
+                        </option>
                         {% endfor %}
                     </optgroup>
                 </select>
@@ -39,6 +43,9 @@
 
                 <button type="submit">Analizuj</button>
             </form>
+
+            <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
+
             {% endblock %}
 
         </div>

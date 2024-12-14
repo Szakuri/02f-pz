@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/stylesPosition.css">
+
+    <head>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    </head>
+
     <title>Ranking</title>
 </head>
 
@@ -16,7 +21,6 @@
             {% block content %}
             <h2>Ranking kandydatów</h2>
 
-            <!-- Formularz wyboru stanowiska i liczby wyników -->
             <form method="get">
                 <label for="position_id">Wybierz stanowisko:</label>
                 <select id="position_id" name="position_id">
@@ -31,6 +35,7 @@
                 <input type="number" id="limit" name="limit" value="{{ limit }}" min="1" max="50">
 
                 <button type="submit">Pokaż ranking</button>
+                <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
             </form>
 
             <div class="table-container">
@@ -54,13 +59,28 @@
                             <td>{{ candidate.email_cv or "Nie znaleziono" }}</td>
                             <td>{{ candidate.phone_number or "Nie znaleziono" }}</td>
                             <td>{{ candidate.points }}</td>
+                            <td>
+                                {% if candidate.path %}
+                                <a href="{{ url_for('download_cv', candidate_id=candidate.id) }}" target="_blank"><i
+                                        class="fa fa-download"></i></a>
+                                <a href="{{ url_for('preview_cv', candidate_id=candidate.id) }}" target="_blank"><i
+                                        class="fas fa-eye"></i></a>
+                                {% else %}
+                                Brak CV
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form action="{{ url_for('delete_candidate', candidate_id=candidate.id) }}"
+                                    method="POST" style="display:inline;">
+                                    <button class="delete-candit" type="submit">
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-
-            <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
             {% endblock %}
         </div>
     </div>

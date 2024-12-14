@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wyniki Analizy CV</title>
     <link rel="stylesheet" href="../static/stylesResult.css">
+    <script>
+        function toggleDetails() {
+            const detailsSection = document.getElementById("details-section");
+            const toggleButton = document.getElementById("toggle-button");
+
+            if (detailsSection.style.display === "none") {
+                detailsSection.style.display = "block";
+                toggleButton.textContent = "Ukryj szczegóły";
+            } else {
+                detailsSection.style.display = "none";
+                toggleButton.textContent = "Pokaż szczegóły";
+            }
+        }
+    </script>
 </head>
 
 <body>
-
     <div class="center-container">
         <div class="content-box">
             <h1>{% extends "base.html" %}</h1>
@@ -18,32 +31,33 @@
 
             <h2>Wyniki analizy dla:</h2>
             <p>Wprowadzona nazwa: {{ name }}</p>
-            <h3>Adres e-mail: {{ email_cv or "Nie znaleziono" }}</h3>
-            <p>Imię i nazwisko: {{ first_words }}</p>
             <h3>Łączna liczba punktów: {{ total_score }}</h3>
 
+            <button id="toggle-button" class="action-button" onclick="toggleDetails()">Pokaż szczegóły</button>
             <a href="{{ url_for('home') }}" class="action-button">Wróć</a>
-            <div class="table-container">
-                <table class="analysis-table">
-                    <thead>
-                        <tr>
-                            <th>Słowo kluczowe</th>
-                            <th>Ilość wystąpień</th>
-                            <th>Waga</th>
-                            <th>Punkty</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for keyword, data in results.items() %}
-                        <tr>
-                            <td>{{ keyword }}</td>
-                            <td>{{ data.count }}</td>
-                            <td>{{ data.weight }}</td>
-                            <td>{{ data.points }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+            <div id="details-section" style="display: none;">
+                <div class="table-container">
+                    <table class="analysis-table">
+                        <thead>
+                            <tr>
+                                <th>Słowo kluczowe</th>
+                                <th>Ilość wystąpień</th>
+                                <th>Waga</th>
+                                <th>Punkty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for keyword, data in results.items() %}
+                            <tr>
+                                <td>{{ keyword }}</td>
+                                <td>{{ data.count }}</td>
+                                <td>{{ data.weight }}</td>
+                                <td>{{ data.points }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,3 @@
+Front-End Developer:
+
+HTML,CSS,JavaScript,TypeScript,React,Vue,Angular,Sass,Less,Webpack,Babel,Gulp,Node,Next.js,Nuxt.js,ES6,jQuery,Redux,MobX,API,programista,programming,programmer,front-end,programowanie,Gatsby,D3,Chart.js,REST,GraphQL,JSON,Bootstrap,Materialize,UI,UX,Figma,Storybook,Jest,Testing,B2,C1,C2,Git,Responsive,SPA,TSX,ECMAScript,GitHub,WebGL,Canvas,Flexbox,Grid,A11y
