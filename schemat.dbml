@@ -8,7 +8,6 @@ Table users {
   email varchar(100) [unique, not null]
   password_hash varchar(128) [not null]
 
-  Note: "Stores user details including hashed password."
 }
 
 Table positions {
@@ -17,7 +16,6 @@ Table positions {
   is_default boolean [default: false]
   user_id int
 
-  Note: "Represents job positions. Linked to users."
 }
 
 Table keywords {
@@ -26,7 +24,6 @@ Table keywords {
   position_id int [not null]
   weight int [default: 1]
 
-  Note: "Keywords associated with positions."
 }
 
 Table candidates {
@@ -39,8 +36,6 @@ Table candidates {
   email_cv varchar(120)
   phone_number varchar(20)
   user_id int [not null]
-
-  Note: "Candidate data including contact and associated position."
 }
 
 Ref: positions.user_id > users.id
